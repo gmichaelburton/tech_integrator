@@ -1,5 +1,8 @@
 # README
 
+To boot server - rails s -b $IP -p $PORT
+
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
