@@ -4,4 +4,6 @@ root "pages#home"
 
 get 'pages/home', to: 'pages#home'
 
+get '/projects', to: 'projects#index'
+
 end
