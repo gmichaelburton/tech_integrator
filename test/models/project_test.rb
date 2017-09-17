@@ -3,7 +3,13 @@ require 'test_helper'
 class ProjectTest < ActiveSupport::TestCase
   
   def setup #run before every test
-    @project = Project.new(project_name: "New Test Project", control_number: "176787")
+    @user = User.create!(username: "burtm", email: "michael@fordav.com")
+    @project = @user.projects.build(project_name: "New Test Project", control_number: "176787")
+  end
+  
+  test "project without user should be invalid" do
+    @project.user_id = nil
+    assert_not @project.valid?
   end
   
   test "project should be valid" do
