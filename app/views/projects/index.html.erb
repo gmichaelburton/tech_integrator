@@ -1,22 +1,18 @@
-<h1 align="center">Listing all Projects</h1>
-<hr />
+<%= render 'shared/page_title', title: "my project Listing" %>
 
 <% @projects.each do |project| %>
   <div class="row">
     <div class="col-md-2">
-      <section class="center">
-        
+      <section class="user_info center">
+        <%= gravatar_for(project.user, size: 120)%>
       </section>
     </div>
     <div class="col-md-8 well">
-       <h4><%= project.project_name %></h4>
-       <p><%= project.control_number %></p>
-  <p>
-    <span class="quiet"><small>Created <%= time_ago_in_words(project.created_at) %> ago </small></span>
-    </p>
+      <h4><%= link_to project.project_name, project_path(project) %></h4>
+      <p><%= project.control_number %></p>
+      <p>
+        <span class="quiet"><small>Created <%= time_ago_in_words(project.created_at) %> ago </small></span>
+      </p>
     </div>
   </div>
-
- 
-  
 <% end %>

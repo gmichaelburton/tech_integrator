@@ -1,0 +1,24 @@
+
+<%= render 'shared/page_title', title: @project.project_name %>
+
+<div class="well col-md-8 col-md-offset-2">
+  <h4 class="center control_number"><strong>Control Number:  </strong></h4>
+  <hr />
+  <%= simple_format(@project.control_number) %>
+  <hr />
+  <div class= "pull-right">
+    <p class= "center">
+      <em>Created by:</em>
+    </p>
+    <p class="center">
+      <%= link_to gravatar_for(@project.user), project_path %>
+    </p>
+    <p class="center">
+      <small><%= @project.user.username.capitalize %></small>
+      <div class="pull-right"> <%= time_ago_in_words(@project.created_at) %> ago </div>
+    </p>
+  </div>
+</div>
+
+
+
