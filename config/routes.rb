@@ -4,7 +4,6 @@ root "pages#home"
 
 get 'pages/home', to: 'pages#home'
 
-get '/projects', to: 'projects#index'
-get '/projects/:id', to: 'projects#show', as: 'project'
+resources :projects
 
 end
