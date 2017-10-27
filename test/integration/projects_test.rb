@@ -24,7 +24,7 @@ class ProjectsTest < ActionDispatch::IntegrationTest
   test "should get project show" do
    get project_path(@project)
    assert_template 'projects/show'
-   assert_match @project.project_name, response.body
+   assert_match @project.project_name.capitalize, response.body
    assert_match @project.control_number, response.body
    assert_match @user.username, response.body
   
@@ -33,13 +33,13 @@ class ProjectsTest < ActionDispatch::IntegrationTest
   test "create new valid project" do
      get new_project_path
      assert_template 'projects/new'
-     name_of_project = "Sample Project"
+     name_of_project = "sample project"
      control_number_of_project = "123123"
      assert_difference 'Project.count', 1 do
       post projects_path, params: { project: { project_name: name_of_project, control_number: control_number_of_project }}
      end
      follow_redirect!
-     assert_match name_of_project, response.body
+     assert_match name_of_project, response.body.capitalize
      assert_match control_number_of_project, response.body
    end
   
