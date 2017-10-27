@@ -27,6 +27,8 @@ class ProjectsTest < ActionDispatch::IntegrationTest
    assert_match @project.project_name.capitalize, response.body
    assert_match @project.control_number, response.body
    assert_match @user.username, response.body
+   assert_select 'a[href=?]', edit_project_path(@project), text: "Edit this project"
+   assert_select 'a[href=?]', project_path(@project), text: "Delete this project"
   
   end
  
