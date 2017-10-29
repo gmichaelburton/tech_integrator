@@ -23,6 +23,7 @@
     <%= link_to "Delete this project", project_path(@project), method: :delete,
                                         data: { confirm: "Are you sure you want to delete this project?"},
                                         class: "btn btn-xs btn-danger" %>
+    <%= link_to "Return to projects listing", projects_path, class: "btn btn-xs btn-primary" %>
   </div>
 </div>
 

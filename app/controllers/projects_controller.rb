@@ -1,12 +1,14 @@
 class ProjectsController < ApplicationController
   
+  before_action :set_project, only: [:show, :edit, :update]
+  
   
   def index
     @projects = Project.all
   end
   
   def show
-    @project = Project.find(params[:id])
+    
   end
   
   def new
@@ -26,11 +28,11 @@ class ProjectsController < ApplicationController
   end
   
   def edit
-    @project = Project.find(params[:id])
+    
   end
   
   def update
-    @project = Project.find(params[:id])
+   
     if @project.update(project_params)
       flash[:success] = "Project was updated successfully!"
       redirect_to project_path(@project)
@@ -48,6 +50,10 @@ class ProjectsController < ApplicationController
 
 
   private
+  
+    def set_project
+      @project = Project.find(params[:id])
+    end
   
     def project_params
       params.require(:project).permit(:project_name, :control_number)
