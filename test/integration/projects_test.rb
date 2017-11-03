@@ -3,7 +3,8 @@ require 'test_helper'
 class ProjectsTest < ActionDispatch::IntegrationTest
  
  def setup
-   @user = User.create!(username: "burtm", email: "burtm@fordav.com")
+   @user = User.create!(username: "burtm", email: "burtm@fordav.com",
+                       password: "password", password_confirmation: "password")
    @project = Project.create(project_name: "Test Project", control_number: "123456", user: @user)
    @project2 = @user.projects.build(project_name: "Cool Hawaii Project", control_number: "654321")
    @project2.save

@@ -5,7 +5,8 @@ class ProjectsEditTest < ActionDispatch::IntegrationTest
   #   assert true
   # end
   def setup
-    @user = User.create!(username: "burtm", email: "burtm@fordav.com")
+    @user = User.create!(username: "burtm", email: "burtm@fordav.com",
+                        password: "password", password_confirmation: "password")
     @project = Project.create(project_name: "Test Project", control_number: "123456", user: @user)
   end
 

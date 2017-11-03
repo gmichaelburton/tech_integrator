@@ -6,7 +6,7 @@
     <%= form_for(@project, :html => {class: "form-horizontal", role: "form"}) do |f| %>
       <div class="form-group">
         <div class="control-label col-md-2">
-          <%= f.label :name %>
+          <%= f.label :project_name %>
         </div>
         <div class="col-md-8">
           <%= f.text_field :project_name, class: "form-control", placeholder: "Name of Project", autofocus: true %>

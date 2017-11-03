@@ -3,7 +3,8 @@ require 'test_helper'
 class ProjectTest < ActiveSupport::TestCase
   
   def setup #run before every test
-    @user = User.create!(username: "burtm", email: "michael@fordav.com")
+    @user = User.create!(username: "burtm", email: "michael@fordav.com",
+                        password: "password", password_confirmation: "password")
     @project = @user.projects.build(project_name: "New Test Project", control_number: "176787")
   end
   

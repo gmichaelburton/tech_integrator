@@ -6,4 +6,7 @@ get 'pages/home', to: 'pages#home'
 
 resources :projects
 
+get '/signup', to: 'users#new'
+resources :users, except: [:new]
+
 end
