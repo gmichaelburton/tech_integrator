@@ -22,7 +22,7 @@ class ProjectsEditTest < ActionDispatch::IntegrationTest
   test "successfully edit a project" do
     get edit_project_path(@project)
     assert_template 'projects/edit'
-    updated_project_name = "updated recipe name"
+    updated_project_name = "updated project name"
     updated_control_number = "123123"
     patch project_path(@project), params: { project: {project_name: updated_project_name, control_number: updated_control_number}}
     assert_redirected_to @project

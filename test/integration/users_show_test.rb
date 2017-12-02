@@ -20,8 +20,6 @@ class UsersShowTest < ActionDispatch::IntegrationTest
    assert_match @project.project_name, response.body
    assert_match @project2.project_name, response.body
    assert_match @user.username, response.body
-   
-   
   
   end
   
