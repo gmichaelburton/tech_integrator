@@ -5,12 +5,13 @@ class ProjectsEditTest < ActionDispatch::IntegrationTest
   #   assert true
   # end
   def setup
-    @user = User.create!(username: "burtm", email: "burtm@fordav.com",
+    @user = User.create!(username: "burtm", email: "burtm@fordav.com", first_name: "Michael",
                         password: "password", password_confirmation: "password")
     @project = Project.create(project_name: "Test Project", control_number: "123456", user: @user)
   end
 
   test "reject invalid project update" do
+    sign_in_as(@user, "password")
     get edit_project_path(@project)
     assert_template 'projects/edit'
     patch project_path(@project), params: { project: { project_name: " ", control_number: "12" } }
@@ -20,6 +21,7 @@ class ProjectsEditTest < ActionDispatch::IntegrationTest
   end
   
   test "successfully edit a project" do
+    sign_in_as(@user, "password")
     get edit_project_path(@project)
     assert_template 'projects/edit'
     updated_project_name = "updated project name"

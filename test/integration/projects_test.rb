@@ -3,7 +3,7 @@ require 'test_helper'
 class ProjectsTest < ActionDispatch::IntegrationTest
  
  def setup
-   @user = User.create!(username: "burtm", email: "burtm@fordav.com",
+   @user = User.create!(username: "burtm", email: "burtm@fordav.com", first_name: "Michael",
                        password: "password", password_confirmation: "password")
    @project = Project.create(project_name: "Test Project", control_number: "123456", user: @user)
    @project2 = @user.projects.build(project_name: "Cool Hawaii Project", control_number: "654321")
@@ -23,6 +23,7 @@ class ProjectsTest < ActionDispatch::IntegrationTest
   end
  
   test "should get project show" do
+   sign_in_as(@user, "password")
    get project_path(@project)
    assert_template 'projects/show'
    assert_match @project.project_name.capitalize, response.body
@@ -35,6 +36,7 @@ class ProjectsTest < ActionDispatch::IntegrationTest
   end
  
   test "create new valid project" do
+    sign_in_as(@user, "password")
      get new_project_path
      assert_template 'projects/new'
      name_of_project = "sample project"
@@ -48,14 +50,15 @@ class ProjectsTest < ActionDispatch::IntegrationTest
    end
   
  test "reject invalid project submissions" do
-     get new_project_path
-     assert_template 'projects/new'
-     assert_no_difference 'Project.count' do
-      post projects_path, params: { project: { project_name: " ", control_number: " " }}
-     end
-     assert_template 'projects/new'
-     assert_select 'h2.panel-title'
-     assert_select 'div.panel-body'
+    sign_in_as(@user, "password")
+    get new_project_path
+    assert_template 'projects/new'
+    assert_no_difference 'Project.count' do
+     post projects_path, params: { project: { project_name: " ", control_number: " " }}
+    end
+    assert_template 'projects/new'
+    assert_select 'h2.panel-title'
+    assert_select 'div.panel-body'
   end 
  
 end

@@ -9,6 +9,8 @@
           <li> <%= link_to gravatar_for(user), user_path(user) %></li>
           <li class="user-title"> <%= link_to user.username.capitalize, user_path(user) %></li>
           <li><small><%= pluralize(user.projects.count, "project") if user.projects %></small></li>
+          <li><%= link_to "Delete this user", user_path(user), 
+            method: :delete, data: {confirm: "Are you sure you want to delete this user and all associated projects?"} %></li>
         </div>
       </div>
     </ul>

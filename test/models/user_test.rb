@@ -77,5 +77,13 @@ class UserTest < ActiveSupport::TestCase
     
   end
 
+   test "associated projects should be destroyed" do
+    @user.save
+    @user.projects.create!(project_name: "testing delete", control_number: "123123")
+    assert_difference 'Project.count', -1 do
+      @user.destroy
+    end
+  end
+
   
 end

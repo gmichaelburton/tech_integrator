@@ -1,6 +1,8 @@
 class ProjectsController < ApplicationController
   
-  before_action :set_project, only: [:show, :edit, :update]
+  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, except: [:index, :show]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
   
   
   def index
@@ -18,7 +20,7 @@ class ProjectsController < ApplicationController
   
   def create
     @project = Project.new(project_params)
-    @project.user = User.first
+    @project.user = current_user
     if @project.save
       flash[:success] = "Project was created successfully!"
       redirect_to project_path(@project)
@@ -57,6 +59,13 @@ class ProjectsController < ApplicationController
   
     def project_params
       params.require(:project).permit(:project_name, :control_number)
+    end
+    
+    def require_same_user
+      if current_user != @project.user
+        flash[:danger] = "You can only edit or delete your own projects"
+        redirect_to projects_path
+      end
     end
   
 end

@@ -5,11 +5,12 @@ class UsersEditTest < ActionDispatch::IntegrationTest
   #   assert true
   # end
   def setup
-    @user = User.create!(username: "burtm", email: "burtm@fordav.com",
+    @user = User.create!(username: "burtm", email: "burtm@fordav.com", first_name: "Michael",
                         password: "password", password_confirmation: "password")
   end
   
   test "reject an invalid edit" do
+    sign_in_as(@user, "password")
     get edit_user_path(@user)
     assert_template 'users/edit'
     patch user_path(@user), params: { user: { username: " ", first_name: " ", last_name: " ",
@@ -20,6 +21,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
   end
   
   test "accept valid edit" do
+    sign_in_as(@user, "password")
     get edit_user_path(@user)
     assert_template 'users/edit'
     patch user_path(@user), params: { user: { username: "burtm1", email: "burtm1@fordav.com" } }

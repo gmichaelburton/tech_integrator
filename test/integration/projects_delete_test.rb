@@ -6,12 +6,13 @@ class ProjectsDeleteTest < ActionDispatch::IntegrationTest
   # end
   
   def setup
-    @user = User.create!(username: "burtm", email: "burtm@fordav.com",
+    @user = User.create!(username: "burtm", email: "burtm@fordav.com", first_name: "Michael",
                         password: "password", password_confirmation: "password")
     @project = Project.create(project_name: "Test Project", control_number: "123456", user: @user)
   end
   
   test "successfully delete a project" do
+    sign_in_as(@user, "password")
     get project_path(@project)
     assert_template 'projects/show'
     assert_select 'a[href=?]', project_path(@project), text: "Delete this project"
