@@ -11,7 +11,7 @@
       <p>
         <span class="quiet"><small>Created <%= time_ago_in_words(project.created_at) %> ago </small></span>
       </p>
-      <% if logged_in? && current_user == project.user %>
+      <% if logged_in? && (current_user == project.user || current_user.admin?) %>
         <div class="project-actions">
           <%= link_to "Edit this project", edit_project_path(project), class: "btn btn-xs btn-warning" %>
           <%= link_to "Delete this project", project_path(project), method: :delete,

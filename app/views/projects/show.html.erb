@@ -19,7 +19,7 @@
     </p>
   </div>
   <div class="project-actions">
-    <% if logged_in? && current_user == @project.user%>
+    <% if logged_in? && (current_user == @project.user || current_user.admin?)%>
       <%= link_to "Edit this project", edit_project_path(@project), class: "btn btn-xs btn-warning" %>
       <%= link_to "Delete this project", project_path(@project), method: :delete,
                                           data: { confirm: "Are you sure you want to delete this project?"},
